@@ -1,0 +1,12 @@
+vendor
+runtime
+.ENV
+.svn
+runtime
+composer.phar
+composer.lock
+Thumbs.db
+*.DS_Store
+.idea
+.vscode
+import

@@ -1,14 +1,15 @@
 <?php
 /**
  * 首页控制器
- * @author yupoxiong<i@yupoxiong.com>
  */
 
 declare (strict_types=1);
 
 namespace app\admin\controller;
 
+use app\common\model\User;
 use Exception;
+use think\facade\View;
 
 class IndexController extends AdminBaseController
 {
@@ -17,8 +18,13 @@ class IndexController extends AdminBaseController
      * @return string
      * @throws Exception
      */
-    public function index(): string
+    public function index (): string
     {
-        return  $this->fetch();
+        // 查找一周内注册用户信息
+        $user = \app\common\model\User::where ('create_time', '>', time () - 60 * 60 * 24 * 7)->count ();
+        $this->assign ([
+            'user' => $user,
+        ]);
+        return $this->fetch ();
     }
 }

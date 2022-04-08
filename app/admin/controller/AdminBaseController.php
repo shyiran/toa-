@@ -1,7 +1,6 @@
 <?php
 /**
  * 后台基类
- * @author yupoxiong<i@yupoxiong.com>
  */
 
 declare (strict_types=1);
@@ -72,39 +71,39 @@ class AdminBaseController
      */
     protected AdminUser $user;
 
-    public function __construct()
+    public function __construct ()
     {
         // 初始化
-        $this->initialize();
+        $this->initialize ();
     }
 
     /**
      * 初始化方法
      */
-    public function initialize(): void
+    public function initialize (): void
     {
         // 检查登录
-        $this->checkLogin();
+        $this->checkLogin ();
         // 检查权限
-        $this->checkAuth();
+        $this->checkAuth ();
         // 单设备登录检查
-        $this->checkOneDeviceLogin();
+        $this->checkOneDeviceLogin ();
         // csrfToken检查
-        $this->checkToken();
+        $this->checkToken ();
 
         // 初始化view
-        $this->view = app()->make(View::class);
+        $this->view = app ()->make (View::class);
 
         // 分页每页数量
-        $this->admin['admin_list_rows'] = cookie('admin_list_rows') ?? 10;
+        $this->admin['admin_list_rows'] = cookie ('admin_list_rows') ?? 10;
         // 限制每页数量最多不超过100
         $this->admin['admin_list_rows'] = $this->admin['admin_list_rows'] < 100 ? $this->admin['admin_list_rows'] : 100;
         /** @var AdminMenu $menu */
-        $this->menu = (new AdminMenu)->where(['url' => $this->url])->findOrEmpty();
+        $this->menu = (new AdminMenu)->where ([ 'url' => $this->url ])->findOrEmpty ();
 
-        if (isset($this->user) && !$this->menu->isEmpty() && request()->method() === $this->menu->log_method) {
+        if (isset($this->user) && !$this->menu->isEmpty () && request ()->method () === $this->menu->log_method) {
             // 如果用户登录了而且符合菜单记录日志方式，记录操作日志
-            $this->createLog($this->user, $this->menu->name);
+            $this->createLog ($this->user, $this->menu->name);
         }
     }
 
@@ -114,9 +113,9 @@ class AdminBaseController
      * @param null $value
      * @return View
      */
-    protected function assign($name, $value = null): View
+    protected function assign ($name, $value = null): View
     {
-        return $this->view->assign($name, $value);
+        return $this->view->assign ($name, $value);
     }
 
     /**
@@ -126,44 +125,44 @@ class AdminBaseController
      * @return string
      * @throws Exception
      */
-    protected function fetch(string $template = '', array $vars = []): string
+    protected function fetch (string $template = '', array $vars = []): string
     {
         // 顶部导航
-        $this->admin['top_nav'] = (int)setting('admin.display.top_nav');
+        $this->admin['top_nav'] = (int)setting ('admin.display.top_nav');
         // 后台基本信息配置
-        $this->admin['base'] = setting('admin.base');
+        $this->admin['base'] = setting ('admin.base');
         // 当前顶部导航ID
         $current_top_id = 0;
 
-        if (!$this->menu->isEmpty()) {
-            $menu     = $this->menu;
-            $menu_all = (new AdminMenu)->field('id,parent_id,name,icon')->select()->toArray();
+        if (!$this->menu->isEmpty ()) {
+            $menu = $this->menu;
+            $menu_all = (new AdminMenu)->field ('id,parent_id,name,icon')->select ()->toArray ();
             // 当前页面标题
-            $this->admin['title']      = $menu->name;
+            $this->admin['title'] = $menu->name;
             // 当前面包屑
-            $this->admin['breadcrumb'] = $this->getBreadCrumb($menu_all, $menu->id);
+            $this->admin['breadcrumb'] = $this->getBreadCrumb ($menu_all, $menu->id);
             if ($this->admin['top_nav'] === 1) {
                 // 顶部导航id
-                $current_top_id = $this->getTopParentIdById($menu_all, $menu->id);
+                $current_top_id = $this->getTopParentIdById ($menu_all, $menu->id);
             }
         }
         // 当前是否为pjax访问
-        $this->admin['is_pjax']    = request()->isPjax();
+        $this->admin['is_pjax'] = request ()->isPjax ();
         // 上传文件url
-        $this->admin['upload_url'] = url('admin/file/upload')->build();
+        $this->admin['upload_url'] = url ('admin/file/upload')->build ();
         // 退出url
-        $this->admin['logout_url'] = url('admin/auth/logout')->build();
+        $this->admin['logout_url'] = url ('admin/auth/logout')->build ();
 
         if ('admin/auth/login' !== $this->url && !$this->admin['is_pjax']) {
             // 展示菜单
-            $show_menu = $this->user->getShowMenu($this->admin['top_nav']);
+            $show_menu = $this->user->getShowMenu ($this->admin['top_nav']);
             // 顶部导航
-            $this->admin['top_menu']  = $show_menu['top'];
+            $this->admin['top_menu'] = $show_menu['top'];
             // 左侧菜单
-            $this->admin['left_menu'] = $this->getLeftMenu($show_menu['left'][$current_top_id], $menu->id ?? 0);
+            $this->admin['left_menu'] = $this->getLeftMenu ($show_menu['left'][$current_top_id], $menu->id ?? 0);
         }
         // 是否开启debug
-        $this->admin['debug'] = Env::get('app_debug') ? 1 : 0;
+        $this->admin['debug'] = Env::get ('app_debug') ? 1 : 0;
         // 顶部导航
         $this->admin['top_nav'] = 1;
         // 顶部搜索
@@ -173,17 +172,17 @@ class AdminBaseController
         // 顶部通知
         $this->admin['top_notification'] = 0;
         // 文件删除url
-        $this->admin['file_del_url'] = url('admin/file/del');
+        $this->admin['file_del_url'] = url ('admin/file/del');
         // 地图配置
-        $this->admin['map']          = config('map');
+        $this->admin['map'] = config ('map');
         // 当前用户
         $this->admin['user'] = $this->user ?? new AdminUser();
 
         // 赋值后台变量
-        $this->assign([
+        $this->assign ([
             'admin' => $this->admin,
         ]);
-        return $this->view->fetch($template, $vars);
+        return $this->view->fetch ($template, $vars);
     }
 
     /**
@@ -193,11 +192,11 @@ class AdminBaseController
      * @return string|Json
      * @throws Exception
      */
-    public function __call($name, $arguments)
+    public function __call ($name, $arguments)
     {
-        if (request()->isPost()) {
-            return admin_error('页面未找到');
+        if (request ()->isPost ()) {
+            return admin_error ('页面未找到');
         }
-        return $this->fetch('error/404');
+        return $this->fetch ('error/404');
     }
 }

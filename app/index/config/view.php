@@ -1,7 +1,6 @@
 <?php
 /**
  * 视图配置
- * @author yupoxiong<i@yupoxiong.com>
  */
 
 return [

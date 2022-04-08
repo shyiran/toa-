@@ -1,0 +1,142 @@
+a {color: #6c757d;-webkit-transition: .3s linear;transition: .3s linear}
+a:hover, a:focus, a:active {color: #cccccc;text-decoration: none;outline: none}
+a,
+button,
+a:focus,
+a:active,
+button:focus,
+button:active,
+.input-group-text:focus,
+.input-group-text:active {
+    outline: none !important;
+}
+ul,li{ margin: 0;padding: 0; list-style: none}
+.dropdown-profile img {
+    height: auto;
+    width: 2.1rem;
+    margin-right: 5px;
+}
+.dropdown-profile .dropdown-toggle {
+    line-height: 40px;
+}
+.single-latest-image img{ width: 200px; height: 150px;}
+
+
+.index_zxyy{display: flex; justify-content: space-between}
+.index_zxyy .content{ line-height: 2.2rem}
+.index_zxyy .tit{display: flex;justify-content: space-between;font-size: 0.8rem;color: #ccc;}
+
+
+
+
+.gsxc{display: flex}
+
+.card_head{height: 3rem;border-bottom: 2px solid #ccc;display: flex;justify-content: space-between;line-height: 3rem;}
+.card_head .title{font-size: 1.2rem;}
+.card_head .title i{ padding: 0rem 0.5rem;}
+.card_head .link{font-size: 0.8rem;line-height: 3.5rem;}
+
+
+/*最新要闻 幻灯片*/
+.news-slide{}
+.news-slide .bd, .news-slide .bd li, .news-slide .bd li a, .news-slide .bd img{width: 100%;display: block;height: 235px;overflow: hidden;}
+.news-slide .txt{height: 30px;overflow: hidden;background: #e0e0e0;}
+.news-slide .txt li{height: 30px;}
+.news-slide .txt li a{display: block;font-size: 12px;color: #666;line-height: 30px;height: 30px;text-indent: 10px;width: 217px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.news-slide .hd{position: absolute;bottom: 0;right: 0;z-index: 1;}
+.news-slide .hd li{float: left;width: 23px;height: 30px;line-height: 30px;font-size: 12px;color: #666;text-align: center;margin-left: 1px;background: #f3f3f3;}
+.news-slide .hd li.on{background: #d31825;color: #fff;}
+
+.news-top{border-bottom: 1px solid #ddd;padding-bottom: 4px;}
+.news-top .tit{font-size: 16px;font-weight: bold;color: #d6000f;line-height: 20px;display:table;height:40px;width: 100%;}
+.news-top .tit .table-cell{height: 40px;vertical-align: middle;display: table-cell;}
+.news-top .date{font-size: 12px;color: #999;line-height: 18px;margin-top: 4px;}
+.news-top .info{font-size: 14px;color: #666;line-height: 22px;margin-top: 3px;}
+.news-list li {display: block;overflow: hidden;line-height: 28px;height: 28px;}
+.news-list li p{float: left;width: 262px;height: 22px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-size: 14px;color: #666;}
+.news-list li span{float: right;font-size: 12px;color: #999;margin-right: 2px;}
+.news-list li a:hover p, .news-list li a:hover span{color: #d6000f;}
+/*通知公告*/
+.notice .news-list{}
+.notice .news-list li{padding: 3px 0;}
+.notice .news-list li p{width: 100%;}
+/*综合服务*/
+.comprehensive{}
+.comprehensive .cate_list{}
+.comprehensive .cate_list ul{}
+.comprehensive .cate_list ul li{float: left;width: 48%; text-align: center;font-size: 12px;}
+.comprehensive .cate_list ul li:nth-of-type(even){margin-left: 4%;}
+.comprehensive .cate_list ul li img{ width: 100%;margin: 5px 0px;height:45px;border-radius: 5px; border: 1px solid #ccc;}
+.comprehensive .cate_list ul li a,.comprehensive .cate_list ul li a:hover{color: #666;}
+/*领导信箱*/
+.mailbox_list{}
+.mailbox_list ul{ margin: 5px 0px}
+.mailbox_list ul li{float: left;width:48%;}
+.mailbox_list ul li:nth-of-type(even){margin-left: 4%;}
+.mailbox_list ul li img{border: 1px solid #ccc;border-radius: 5px;margin: 8% 0 0; height: 55px; width: 100%}
+
+
+.business{width: 100%}
+.business-slide{
+    margin-top: 20px;
+    width: 100%;
+    height: 196px;
+    position: relative;
+}
+.business-slide .bd{
+    width: 100%;
+    height: 196px;
+    overflow: hidden;
+}
+.business-slide .bd ul{}
+.business-slide .bd li{
+    float: left;
+    width: 20%;
+
+}
+.business-slide .bd li .pic{}
+.business-slide .bd li .pic img{border: 1px solid #ccc;
+    border-radius: 7px;
+    height: 120px;
+    width: 215px;}
+.business-slide .bd li .content{line-height: 18px;
+    margin: 5px 0px;}
+.business-slide .bd li .tit{
+    font-size: 10px;
+    font-weight: bold;
+    color: #666;
+    line-height: 12px;
+}
+.business-slide .bd li .tit .l{float: left}
+.business-slide .bd li .tit .r{float: right}
+.business-slide .prev,
+.business-slide .next{
+    position: absolute;
+    top: -56px;
+    right: 24px;
+    background: url('images/business_arr.png') no-repeat 0 -19px;
+    width: 19px;
+    height: 19px;
+    display: block;
+    cursor: pointer;
+    z-index: 3;
+}
+.business-slide .next{
+    right: 0;
+    background-position: -24px 0;
+}
+.business-slide .nextStop{
+    background-position: -24px -19px;
+}
+.business-slide .prevStop{
+    background-position: 0 0;
+}
+
+
+.top-10 {}
+.top-10 ul {counter-reset: section; margin: 0;padding: 0}
+.top-10 li {line-height: 36px;height: 36px;overflow: hidden;color: #525C66;}
+.top-10 li:before {counter-increment: section;content: counter(section);display: inline-block;padding: 0 12px;margin-right: 10px;height: 18px;line-height: 18px;background: #b8c2cc;color: #fff;border-radius: 30px;font-size: 9px}
+.top-10 li:nth-child(1):before {background: #ff0000}
+.top-10 li:nth-child(2):before {background: #0164b4}
+.top-10 li:nth-child(3):before {background: #ff9900;}
